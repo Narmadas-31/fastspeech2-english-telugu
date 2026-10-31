@@ -1,1 +1,8 @@
-find . -type d -empty -not -path "./.git/*" -exec touch {}/.gitkeep \;
+find . -type d -empty -not -path "./.git/*" -exec touch {}/.gitkeep \;hifigan/*.zip
+hifigan/*.pth.tar
+raw_all/
+raw_data/
+preprocessed_data/
+output/
+__pycache__/
+*.zip
