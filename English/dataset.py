@@ -40,7 +40,11 @@ class Dataset(Dataset):
             "mel",
             "{}-mel-{}.npy".format(speaker, basename),
         )
-        mel = np.load(mel_path)
+        mel = np.load(mel_path).astype(np.float32)
+        pitch = np.load(pitch_path).astype(np.float32)
+        energy = np.load(energy_path).astype(np.float32)
+        duration = np.load(duration_path).astype(np.float32)
+       
         pitch_path = os.path.join(
             self.preprocessed_path,
             "pitch",
