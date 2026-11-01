@@ -143,11 +143,14 @@ class Preprocessor:
         out = [r for r in out if r is not None]
 
         # Write metadata
+        train_lines = [m for m in out if m.split('|')[0].startswith('train_')]
+        val_lines = [m for m in out if m.split('|')[0].startswith('val_')]
+        print('train utts:', len(train_lines), 'val utts:', len(val_lines))
         with open(os.path.join(self.out_dir, "train.txt"), "w", encoding="utf-8") as f:
-            for m in out[self.val_size :]:
+            for m in train_lines:
                 f.write(m + "\n")
         with open(os.path.join(self.out_dir, "val.txt"), "w", encoding="utf-8") as f:
-            for m in out[: self.val_size]:
+            for m in val_lines:
                 f.write(m + "\n")
 
         return out
@@ -260,6 +263,8 @@ class Preprocessor:
         end_idx = 0
         for t in tier._objects:
             s, e, p = t.start_time, t.end_time, t.text
+            if p == "":
+                p = "sp"
 
             # Trim leading silences
             if phones == []:
