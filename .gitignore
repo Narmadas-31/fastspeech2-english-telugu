@@ -6,3 +6,5 @@ preprocessed_data/
 output/
 __pycache__/
 *.zip
+
+!Telugu/data_prep/*.zip
