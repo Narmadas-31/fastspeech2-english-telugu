@@ -27,3 +27,8 @@ symbols = (
     + _pinyin
     + _silences
 )
+
+# --- TELUGU_PHONES ---
+import json as _json, os as _os
+_tp = _json.load(open(_os.path.join(_os.path.dirname(__file__), 'telugu_phones.json'), encoding='utf8'))
+symbols = symbols + [s for s in ['@' + p for p in _tp] if s not in symbols]

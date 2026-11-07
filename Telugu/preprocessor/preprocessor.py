@@ -258,7 +258,7 @@ class Preprocessor:
         start_time = 0
         end_time = 0
         end_idx = 0
-        for t in tier._objects:
+        for t in tier.intervals:
             s, e, p = t.start_time, t.end_time, t.text
 
             # Trim leading silences
