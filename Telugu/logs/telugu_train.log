@@ -1,0 +1,150 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794019379.170281   13516 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+I0000 00:00:1794019381.170445   13516 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794019388.017155   13516 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+Prepare training ...
+Traceback (most recent call last):
+  File "/content/project/Telugu/train.py", line 179, in <module>
+    main(args, configs)
+    ~~~~^^^^^^^^^^^^^^^
+  File "/content/project/Telugu/train.py", line 27, in main
+    dataset = Dataset(
+        "train.txt", preprocess_config, train_config, sort=True, drop_last=True
+    )
+  File "/content/project/Telugu/dataset.py", line 21, in __init__
+    self.basename, self.speaker, self.text, self.raw_text = self.process_meta(
+                                                            ~~~~~~~~~~~~~~~~~^
+        filename
+        ^^^^^^^^
+    )
+    ^
+  File "/content/project/Telugu/dataset.py", line 81, in process_meta
+    with open(
+         ~~~~^
+        os.path.join(self.preprocessed_path, filename), "r", encoding="utf-8"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as f:
+    ^
+FileNotFoundError: [Errno 2] No such file or directory: '/content/preprocessed_data/Telugu/train.txt'
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794019547.079013   14210 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+I0000 00:00:1794019547.154183   14210 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794019550.043582   14210 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+Prepare training ...
+Traceback (most recent call last):
+  File "/content/project/Telugu/train.py", line 179, in <module>
+    main(args, configs)
+    ~~~~^^^^^^^^^^^^^^^
+  File "/content/project/Telugu/train.py", line 27, in main
+    dataset = Dataset(
+        "train.txt", preprocess_config, train_config, sort=True, drop_last=True
+    )
+  File "/content/project/Telugu/dataset.py", line 21, in __init__
+    self.basename, self.speaker, self.text, self.raw_text = self.process_meta(
+                                                            ~~~~~~~~~~~~~~~~~^
+        filename
+        ^^^^^^^^
+    )
+    ^
+  File "/content/project/Telugu/dataset.py", line 81, in process_meta
+    with open(
+         ~~~~^
+        os.path.join(self.preprocessed_path, filename), "r", encoding="utf-8"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as f:
+    ^
+FileNotFoundError: [Errno 2] No such file or directory: '/content/preprocessed_data/Telugu/train.txt'
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794019722.961978   14933 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+I0000 00:00:1794019723.123922   14933 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794019731.462923   14933 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+Prepare training ...
+Traceback (most recent call last):
+  File "/content/project/Telugu/train.py", line 179, in <module>
+    main(args, configs)
+    ~~~~^^^^^^^^^^^^^^^
+  File "/content/project/Telugu/train.py", line 27, in main
+    dataset = Dataset(
+        "train.txt", preprocess_config, train_config, sort=True, drop_last=True
+    )
+  File "/content/project/Telugu/dataset.py", line 21, in __init__
+    self.basename, self.speaker, self.text, self.raw_text = self.process_meta(
+                                                            ~~~~~~~~~~~~~~~~~^
+        filename
+        ^^^^^^^^
+    )
+    ^
+  File "/content/project/Telugu/dataset.py", line 81, in process_meta
+    with open(
+         ~~~~^
+        os.path.join(self.preprocessed_path, filename), "r", encoding="utf-8"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as f:
+    ^
+FileNotFoundError: [Errno 2] No such file or directory: '/content/preprocessed_data/Telugu/train.txt'
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794022132.973545   24642 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+I0000 00:00:1794022133.114614   24642 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794022137.560746   24642 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+Prepare training ...
+Traceback (most recent call last):
+  File "/content/project/Telugu/train.py", line 179, in <module>
+    main(args, configs)
+    ~~~~^^^^^^^^^^^^^^^
+  File "/content/project/Telugu/train.py", line 27, in main
+    dataset = Dataset(
+        "train.txt", preprocess_config, train_config, sort=True, drop_last=True
+    )
+  File "/content/project/Telugu/dataset.py", line 21, in __init__
+    self.basename, self.speaker, self.text, self.raw_text = self.process_meta(
+                                                            ~~~~~~~~~~~~~~~~~^
+        filename
+        ^^^^^^^^
+    )
+    ^
+  File "/content/project/Telugu/dataset.py", line 81, in process_meta
+    with open(
+         ~~~~^
+        os.path.join(self.preprocessed_path, filename), "r", encoding="utf-8"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as f:
+    ^
+FileNotFoundError: [Errno 2] No such file or directory: '/content/preprocessed_data/Telugu/train.txt'
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794040944.339577   16608 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+I0000 00:00:1794040946.816921   16608 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794040953.949748   16608 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+Prepare training ...
+Traceback (most recent call last):
+  File "/content/project/Telugu/train.py", line 179, in <module>
+    main(args, configs)
+    ~~~~^^^^^^^^^^^^^^^
+  File "/content/project/Telugu/train.py", line 27, in main
+    dataset = Dataset(
+        "train.txt", preprocess_config, train_config, sort=True, drop_last=True
+    )
+  File "/content/project/Telugu/dataset.py", line 21, in __init__
+    self.basename, self.speaker, self.text, self.raw_text = self.process_meta(
+                                                            ~~~~~~~~~~~~~~~~~^
+        filename
+        ^^^^^^^^
+    )
+    ^
+  File "/content/project/Telugu/dataset.py", line 81, in process_meta
+    with open(
+         ~~~~^
+        os.path.join(self.preprocessed_path, filename), "r", encoding="utf-8"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as f:
+    ^
+FileNotFoundError: [Errno 2] No such file or directory: '/content/preprocessed_data/Telugu/train.txt'
