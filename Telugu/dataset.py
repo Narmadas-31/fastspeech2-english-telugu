@@ -35,24 +35,28 @@ class Dataset(Dataset):
         speaker_id = self.speaker_map[speaker]
         raw_text = self.raw_text[idx]
         phone = np.array(text_to_sequence(self.text[idx], self.cleaners))
+
         mel_path = os.path.join(
             self.preprocessed_path,
             "mel",
             "{}-mel-{}.npy".format(speaker, basename),
         )
-        mel = np.load(mel_path)
+        mel = np.load(mel_path).astype(np.float32)
+
         pitch_path = os.path.join(
             self.preprocessed_path,
             "pitch",
             "{}-pitch-{}.npy".format(speaker, basename),
         )
-        pitch = np.load(pitch_path)
+        pitch = np.load(pitch_path).astype(np.float32)
+
         energy_path = os.path.join(
             self.preprocessed_path,
             "energy",
             "{}-energy-{}.npy".format(speaker, basename),
         )
-        energy = np.load(energy_path)
+        energy = np.load(energy_path).astype(np.float32)
+
         duration_path = os.path.join(
             self.preprocessed_path,
             "duration",
@@ -199,19 +203,16 @@ class TextDataset(Dataset):
 
 
 if __name__ == "__main__":
-    # Test
+    # Quick sanity test:  python dataset.py
     import torch
     import yaml
     from torch.utils.data import DataLoader
-    from utils.utils import to_device
+    from utils.tools import to_device
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    preprocess_config = yaml.load(
-        open("./config/LJSpeech/preprocess.yaml", "r"), Loader=yaml.FullLoader
-    )
-    train_config = yaml.load(
-        open("./config/LJSpeech/train.yaml", "r"), Loader=yaml.FullLoader
-    )
+    cfg = yaml.load(open("config.yaml", "r"), Loader=yaml.FullLoader)
+    preprocess_config = cfg["preprocessing"]
+    train_config = cfg["train"]
 
     train_dataset = Dataset(
         "train.txt", preprocess_config, train_config, sort=True, drop_last=True
@@ -238,7 +239,7 @@ if __name__ == "__main__":
             to_device(batch, device)
             n_batch += 1
     print(
-        "Training set  with size {} is composed of {} batches.".format(
+        "Training set with size {} is composed of {} batches.".format(
             len(train_dataset), n_batch
         )
     )
@@ -249,7 +250,7 @@ if __name__ == "__main__":
             to_device(batch, device)
             n_batch += 1
     print(
-        "Validation set  with size {} is composed of {} batches.".format(
+        "Validation set with size {} is composed of {} batches.".format(
             len(val_dataset), n_batch
         )
     )

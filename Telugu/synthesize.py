@@ -6,8 +6,6 @@ import torch
 import yaml
 import numpy as np
 from torch.utils.data import DataLoader
-from g2p_en import G2p
-from pypinyin import pinyin, Style
 
 from utils.model import get_model, get_vocoder
 from utils.tools import to_device, synth_samples
@@ -19,9 +17,11 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def read_lexicon(lex_path):
     lexicon = {}
-    with open(lex_path) as f:
+    with open(lex_path, encoding="utf-8") as f:
         for line in f:
             temp = re.split(r"\s+", line.strip("\n"))
+            if len(temp) < 2:
+                continue
             word = temp[0]
             phones = temp[1:]
             if word.lower() not in lexicon:
@@ -30,6 +30,8 @@ def read_lexicon(lex_path):
 
 
 def preprocess_english(text, preprocess_config):
+    from g2p_en import G2p
+
     text = text.rstrip(punctuation)
     lexicon = read_lexicon(preprocess_config["path"]["lexicon_path"])
 
@@ -56,20 +58,20 @@ def preprocess_english(text, preprocess_config):
     return np.array(sequence)
 
 
-def preprocess_mandarin(text, preprocess_config):
+def preprocess_lexicon_language(text, preprocess_config):
+    """Generic lexicon-based text-to-phoneme (use for Telugu and similar).
+    Each word is looked up in the lexicon; unknown words become a pause (sp)."""
+    text = text.strip().rstrip(punctuation + "।")
     lexicon = read_lexicon(preprocess_config["path"]["lexicon_path"])
 
     phones = []
-    pinyins = [
-        p[0]
-        for p in pinyin(
-            text, style=Style.TONE3, strict=False, neutral_tone_with_five=True
-        )
-    ]
-    for p in pinyins:
-        if p in lexicon:
-            phones += lexicon[p]
+    for w in re.split(r"[\s,;.\-\?\!]+", text):
+        if not w:
+            continue
+        if w.lower() in lexicon:
+            phones += lexicon[w.lower()]
         else:
+            print("Warning: word not in lexicon, using pause: {}".format(w))
             phones.append("sp")
 
     phones = "{" + " ".join(phones) + "}"
@@ -111,6 +113,8 @@ def synthesize(model, step, configs, vocoder, batchs, control_values):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
+    parser.add_argument("config", type=str, nargs="?", default="config.yaml",
+                        help="path to config.yaml")
     parser.add_argument("--restore_step", type=int, required=True)
     parser.add_argument(
         "--mode",
@@ -136,19 +140,6 @@ if __name__ == "__main__":
         type=int,
         default=0,
         help="speaker ID for multi-speaker synthesis, for single-sentence mode only",
-    )
-    parser.add_argument(
-        "-p",
-        "--preprocess_config",
-        type=str,
-        required=True,
-        help="path to preprocess.yaml",
-    )
-    parser.add_argument(
-        "-m", "--model_config", type=str, required=True, help="path to model.yaml"
-    )
-    parser.add_argument(
-        "-t", "--train_config", type=str, required=True, help="path to train.yaml"
     )
     parser.add_argument(
         "--pitch_control",
@@ -177,11 +168,10 @@ if __name__ == "__main__":
         assert args.source is None and args.text is not None
 
     # Read Config
-    preprocess_config = yaml.load(
-        open(args.preprocess_config, "r"), Loader=yaml.FullLoader
-    )
-    model_config = yaml.load(open(args.model_config, "r"), Loader=yaml.FullLoader)
-    train_config = yaml.load(open(args.train_config, "r"), Loader=yaml.FullLoader)
+    cfg = yaml.load(open(args.config, "r", encoding="utf-8"), Loader=yaml.FullLoader)
+    preprocess_config = cfg["preprocessing"]
+    model_config = cfg["model"]
+    train_config = cfg["train"]
     configs = (preprocess_config, model_config, train_config)
 
     # Get model
@@ -202,10 +192,13 @@ if __name__ == "__main__":
     if args.mode == "single":
         ids = raw_texts = [args.text[:100]]
         speakers = np.array([args.speaker_id])
-        if preprocess_config["preprocessing"]["text"]["language"] == "en":
+        language = preprocess_config["preprocessing"]["text"].get("language", "en")
+        if language == "en":
             texts = np.array([preprocess_english(args.text, preprocess_config)])
-        elif preprocess_config["preprocessing"]["text"]["language"] == "zh":
-            texts = np.array([preprocess_mandarin(args.text, preprocess_config)])
+        else:
+            texts = np.array(
+                [preprocess_lexicon_language(args.text, preprocess_config)]
+            )
         text_lens = np.array([len(texts[0])])
         batchs = [(ids, raw_texts, speakers, texts, text_lens, max(text_lens))]
 
