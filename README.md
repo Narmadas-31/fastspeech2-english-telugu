@@ -93,7 +93,7 @@ Both languages: about 5 h train and 1 h validation, 22.05 kHz mono, peak-normali
 - **Selection:** time budget split equally between the two speakers (2.5 h + 2.5 h train, 0.5 h + 0.5 h val); 5.00 h train (2110 clips) and 1.00 h val (423 clips). Audio overlap and sentence overlap were checked and are both empty.
 - **Alignment:** no ready Telugu dictionary was used. Each Telugu **character is one "phone"** (`కాలం → క ా ల ం`) and an MFA acoustic model was trained from scratch on the selected data (monophone + triphone). 2510 of 2533 TextGrids were produced (20 train and 3 val clips unaligned).
 - **After alignment and feature extraction:** 2090 train and 420 val utterances (about 3.44 h and 0.69 h). The 63 grapheme symbols found in the alignments are stored in `Telugu/text/telugu_phones.json` and added to `text/symbols.py`.
-- **Not included in this repo:** the Telugu audio, the prepared dataset, TextGrids and extracted features (they are stored on the author's Google Drive and are not part of the submission). Re-create them by following the steps in Section 6.
+- **Not included in this repo:** the Telugu audio, the prepared dataset, TextGrids and extracted features.
 
 ---
 
