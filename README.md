@@ -198,7 +198,7 @@ python train.py config.yaml                       # resume: --restore_step <N>
 ### Checkpoints
 | Model | File | Status |
 |---|---|---|
-| English | `English/checkpoints/10000.pth.tar` | `<<add GitHub / Git LFS / Drive link>>` |
+| English | `English/checkpoints/10000.pth.tar` | `https://github.com/Narmadas-31/fastspeech2-english-telugu/tree/main/English` |
 | Telugu | `Telugu/checkpoints/` | None: training not completed |
 
 ---
